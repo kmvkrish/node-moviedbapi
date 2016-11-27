@@ -1,0 +1,32 @@
+{
+  "name": "node-moviedbapi",
+  "version": "1.0.0",
+  "description": "node.js wrapper for TMDB (The MovieDB REST API)",
+  "main": "index.js",
+  "dependencies": {
+    "request": "^2.79.0",
+    "open": "^0.0.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kmvkrish/node-moviedbapi.git"
+  },
+  "keywords": [
+    "TMDB",
+    "moviedbAPI",
+    "\"node.js",
+    "wrapper",
+    "for",
+    "themoviedb.org\""
+  ],
+  "author": "Krishna Manoj Varanasi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kmvkrish/node-moviedbapi/issues"
+  },
+  "homepage": "https://github.com/kmvkrish/node-moviedbapi#readme"
+}
