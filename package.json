@@ -18,10 +18,7 @@
   "keywords": [
     "TMDB",
     "moviedbAPI",
-    "\"node.js",
-    "wrapper",
-    "for",
-    "themoviedb.org\""
+    "node.js wrapper for themoviedb.org"
   ],
   "author": "Krishna Manoj Varanasi",
   "license": "ISC",
