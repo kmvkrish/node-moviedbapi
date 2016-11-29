@@ -22,7 +22,7 @@ function MovieDBAPI(api_key){
 			page = 1;
 		}
 		if(typeof(year) === 'undefined' || isNaN(year)){
-			year = 2016;
+			year = (new Date().getFullYear());
 		}
 		request(
 			{
