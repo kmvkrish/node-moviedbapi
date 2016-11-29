@@ -12,41 +12,38 @@ module.exports = function(api_key){
 	}
 };
 
+function executeRequest(options, callback){
+	request(
+			options, (error, response, body) => {
+				if(error){
+					console.log(error);
+					return;
+				}
+				if(response.statusCode != 200){
+					console.log(response.body);
+					return;
+				}
+				callback(JSON.parse(body));
+			});
+}
+
 function MovieDBAPI(api_key){
 	api = this;
 	this.api_key = api_key;
 
 	this.discoverMovies = (page, year, callback) => {
-		var res = null;
-		if(typeof(page) === 'undefined' || isNaN(page)){
-			page = 1;
-		}
-		if(typeof(year) === 'undefined' || isNaN(year)){
-			year = (new Date().getFullYear());
-		}
-		request(
-			{
+		executeRequest({
 				url : baseUrl + "/discover/movie",
 			 	qs:{ "api_key" : api.api_key, 'page': page, 'year' : year},
 			 	method: 'GET',
 			 	headers: {
 			 		"Accept":"application/json"
 			 	}
-			}, (error, response, body) => {
-				if(error){
-					console.log(error);
-					return;
-				}
-				if(response.statusCode != 200){
-					console.log(response);
-					return;
-				}
-				callback(JSON.parse(body));
-			});
+			}, callback);
 	};
 	this.discoverTV = function(page, callback){
 		var res = null;
-		request(
+		executeRequest(
 			{
 				url : baseUrl + "/discover/tv",
 			 	qs:{ "api_key" : api.api_key, 'page': page},
@@ -54,21 +51,11 @@ function MovieDBAPI(api_key){
 			 	headers: {
 			 		"Accept":"application/json"
 			 	}
-			}, (error, response, body) => {
-				if(error){
-					console.log(error);
-					return;
-				}
-				if(response.statusCode != 200){
-					console.log(response);
-					return;
-				}
-				callback(JSON.parse(body));
-			});
+			}, callback);
 	};
 
 	this.findMovie = function(imdb_id, callback){
-		request(
+		executeRequest(
 			{
 				url : baseUrl + "/find/" + imdb_id,
 			 	qs:{ "api_key" : api.api_key, 'external_source': 'imdb_id'},
@@ -76,20 +63,10 @@ function MovieDBAPI(api_key){
 			 	headers: {
 			 		"Accept":"application/json"
 			 	}
-			}, (error, response, body) => {
-				if(error){
-					console.log(error);
-					return;
-				}
-				if(response.statusCode != 200){
-					console.log(response);
-					return;
-				}
-				callback(JSON.parse(body));
-			});
+			}, callback);
 	};
 	this.findTVShow = function(tvdb_id, callback){
-		request(
+		executeRequest(
 			{
 				url : baseUrl + "/find/" + imdb_id,
 			 	qs:{ "api_key" : api.api_key, 'external_source': 'tvdb_id'},
@@ -97,21 +74,11 @@ function MovieDBAPI(api_key){
 			 	headers: {
 			 		"Accept":"application/json"
 			 	}
-			}, (error, response, body) => {
-				if(error){
-					console.log(error);
-					return;
-				}
-				if(response.statusCode != 200){
-					console.log(response);
-					return;
-				}
-				callback(JSON.parse(body));
-			});
+			}, callback);
 	};
 
 	this.movieInfo = function(movie_id, callback){
-		request(
+		executeRequest(
 			{
 				url : baseUrl + "/movie/" + movie_id,
 			 	qs:{ "api_key" : api.api_key},
@@ -119,21 +86,11 @@ function MovieDBAPI(api_key){
 			 	headers: {
 			 		"Accept":"application/json"
 			 	}
-			}, (error, response, body) => {
-				if(error){
-					console.log(error);
-					return;
-				}
-				if(response.statusCode != 200){
-					console.log(response);
-					return;
-				}
-				callback(JSON.parse(body));
-			});
+			}, callback);
 	};
 
 	this.similarMovies = function(movie_id, callback){
-		request(
+		executeRequest(
 			{
 				url : baseUrl + "/movie/" + movie_id + "/similar",
 			 	qs:{ "api_key" : api.api_key},
@@ -141,21 +98,11 @@ function MovieDBAPI(api_key){
 			 	headers: {
 			 		"Accept":"application/json"
 			 	}
-			}, (error, response, body) => {
-				if(error){
-					console.log(error);
-					return;
-				}
-				if(response.statusCode != 200){
-					console.log(response);
-					return;
-				}
-				callback(JSON.parse(body));
-			});
+			}, callback);
 	};
 
 	this.recommendedMovies = function(movie_id, callback){
-		request(
+		executeRequest(
 			{
 				url : baseUrl + "/movie/" + movie_id + "/recommendations",
 			 	qs:{ "api_key" : api.api_key},
@@ -163,21 +110,11 @@ function MovieDBAPI(api_key){
 			 	headers: {
 			 		"Accept":"application/json"
 			 	}
-			}, (error, response, body) => {
-				if(error){
-					console.log(error);
-					return;
-				}
-				if(response.statusCode != 200){
-					console.log(response);
-					return;
-				}
-				callback(JSON.parse(body));
-			});
+			}, callback);
 	};
 
 	this.getMovieImages = function(movie_id, callback){
-		request(
+		executeRequest(
 			{
 				url : baseUrl + "/movie/" + movie_id + "/images",
 			 	qs:{ "api_key" : api.api_key},
@@ -185,21 +122,11 @@ function MovieDBAPI(api_key){
 			 	headers: {
 			 		"Accept":"application/json"
 			 	}
-			}, (error, response, body) => {
-				if(error){
-					console.log(error);
-					return;
-				}
-				if(response.statusCode != 200){
-					console.log(response);
-					return;
-				}
-				callback(JSON.parse(body));
-			});
+			}, callback);
 	};
 
 	this.getMovieVideos = function(movie_id, callback){
-		request(
+		executeRequest(
 			{
 				url : baseUrl + "/movie/" + movie_id + "/videos",
 			 	qs:{ "api_key" : api.api_key},
@@ -207,21 +134,11 @@ function MovieDBAPI(api_key){
 			 	headers: {
 			 		"Accept":"application/json"
 			 	}
-			}, (error, response, body) => {
-				if(error){
-					console.log(error);
-					return;
-				}
-				if(response.statusCode != 200){
-					console.log(response);
-					return;
-				}
-				callback(JSON.parse(body));
-			});
+			}, callback);
 	};
 
 	this.tvShowInfo = function(tv_id, callback){
-		request(
+		executeRequest(
 			{
 				url : baseUrl + "/tv/" + tv_id,
 			 	qs:{ "api_key" : api.api_key},
@@ -229,21 +146,11 @@ function MovieDBAPI(api_key){
 			 	headers: {
 			 		"Accept":"application/json"
 			 	}
-			}, (error, response, body) => {
-				if(error){
-					console.log(error);
-					return;
-				}
-				if(response.statusCode != 200){
-					console.log(response);
-					return;
-				}
-				callback(JSON.parse(body));
-			});
+			}, callback);
 	};
 
 	this.tvShowSeasonInfo = function(tv_id, season_id, callback){
-		request(
+		executeRequest(
 			{
 				url : baseUrl + "/tv/" + tv_id + "/season/" + season_id,
 			 	qs:{ "api_key" : api.api_key},
@@ -251,21 +158,11 @@ function MovieDBAPI(api_key){
 			 	headers: {
 			 		"Accept":"application/json"
 			 	}
-			}, (error, response, body) => {
-				if(error){
-					console.log(error);
-					return;
-				}
-				if(response.statusCode != 200){
-					console.log(response);
-					return;
-				}
-				callback(JSON.parse(body));
-			});
+			}, callback);
 	};
 
 	this.tvShowEpisodeInfo = function(tv_id, season_id, episode_id, callback){
-		request(
+		executeRequest(
 			{
 				url : baseUrl + "/tv/" + tv_id + "/season/" + season_id + "/episode/" + episode_id,
 			 	qs:{ "api_key" : api.api_key},
@@ -273,17 +170,7 @@ function MovieDBAPI(api_key){
 			 	headers: {
 			 		"Accept":"application/json"
 			 	}
-			}, (error, response, body) => {
-				if(error){
-					console.log(error);
-					return;
-				}
-				if(response.statusCode != 200){
-					console.log(response);
-					return;
-				}
-				callback(JSON.parse(body));
-			});
+			}, callback);
 	};
 
 
