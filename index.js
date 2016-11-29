@@ -16,14 +16,13 @@ function executeRequest(options, callback){
 	request(
 			options, (error, response, body) => {
 				if(error){
-					console.log(error);
-					return;
+					callback(error);
+				}else if(response.statusCode != 200){
+					callback(response.body);
+				}else{
+					callback(JSON.parse(body));
 				}
-				if(response.statusCode != 200){
-					console.log(response.body);
-					return;
-				}
-				callback(JSON.parse(body));
+				
 			});
 }
 
