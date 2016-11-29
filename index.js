@@ -137,6 +137,76 @@ function MovieDBAPI(api_key){
 			}, callback);
 	};
 
+	this.getLatestMovies = function(callback){
+		if(typeof callback === 'undefined'){
+			callback = (response) => { console.log(response); };
+		}
+		executeRequest({
+			url : baseUrl + "/movie/latests",
+			 	qs:{ "api_key" : api.api_key},
+			 	method: 'GET',
+			 	headers: {
+			 		"Accept":"application/json"
+			 	}
+		}, callback);
+	};
+
+	this.moviesNowPlaying = function(callback){
+		if(typeof callback === 'undefined'){
+			callback = (response) => { console.log(response); };
+		}
+		executeRequest({
+			url : baseUrl + "/movie/now_playing",
+			 	qs:{ "api_key" : api.api_key},
+			 	method: 'GET',
+			 	headers: {
+			 		"Accept":"application/json"
+			 	}
+		}, callback);
+	};
+
+	this.popularMovies = function(callback){
+		if(typeof callback === 'undefined'){
+			callback = (response) => { console.log(response); };
+		}
+		executeRequest({
+			url : baseUrl + "/movie/popular",
+			 	qs:{ "api_key" : api.api_key},
+			 	method: 'GET',
+			 	headers: {
+			 		"Accept":"application/json"
+			 	}
+		}, callback);
+	};
+
+	this.topRatedMovies = function(callback){
+		if(typeof callback === 'undefined'){
+			callback = (response) => { console.log(response); };
+		}
+		executeRequest({
+			url : baseUrl + "/movie/top_rated",
+			 	qs:{ "api_key" : api.api_key},
+			 	method: 'GET',
+			 	headers: {
+			 		"Accept":"application/json"
+			 	}
+		}, callback);
+	};
+
+	this.upcomingMovies = function(callback){
+		if(typeof callback === 'undefined'){
+			callback = (response) => { console.log(response); };
+		}
+		executeRequest({
+			url : baseUrl + "/movie/upcoming",
+			 	qs:{ "api_key" : api.api_key},
+			 	method: 'GET',
+			 	headers: {
+			 		"Accept":"application/json"
+			 	}
+		}, callback);
+	};
+
 	this.tvShowInfo = function(tv_id, callback){
 		executeRequest(
 			{
@@ -173,5 +243,106 @@ function MovieDBAPI(api_key){
 			}, callback);
 	};
 
+	this.similarTVShows = function(tvdb_id, callback){
+		executeRequest({
+			url : baseUrl + "/tv/" + tv_id + "/similar",
+			qs:{ "api_key" : api.api_key },
+			method: 'GET',
+			headers: {
+				"Accept":"application/json"
+			}
+		}, callback);
+	};
 
+	this.latestTVShows = function(callback){
+		if(typeof callback === 'undefined'){
+			callback = (response) => { console.log(response); };
+		}
+		executeRequest({
+			url : baseUrl + "/tv/latest",
+			qs:{ "api_key" : api.api_key },
+			method: 'GET',
+			headers: {
+				"Accept":"application/json"
+			}
+		}, callback);
+	};
+
+	this.popularTVShows = function(callback){
+		if(typeof callback === 'undefined'){
+			callback = (response) => { console.log(response); };
+		}
+		executeRequest({
+			url : baseUrl + "/tv/popular",
+			qs:{ "api_key" : api.api_key },
+			method: 'GET',
+			headers: {
+				"Accept":"application/json"
+			}
+		}, callback);
+	};
+
+	this.topRatedTVShows = function(callback){
+		if(typeof callback === 'undefined'){
+			callback = (response) => { console.log(response); };
+		}
+		executeRequest({
+			url : baseUrl + "/tv/top_rated",
+			qs:{ "api_key" : api.api_key },
+			method: 'GET',
+			headers: {
+				"Accept":"application/json"
+			}
+		}, callback);
+	};
+
+	this.searchMovie = function(query_item, callback){
+		executeRequest({
+			url: baseUrl + "/search/movie",
+			qs: { api_key: api.api_key, query: query_item },
+			method: 'GET',
+			headers: {
+				"Accept":"application/json"
+			}
+		}, callback);
+	};
+
+	this.searchTVShow = function(query_item, callback){
+		executeRequest({
+			url: baseUrl + "/search/tv",
+			qs: { api_key: api.api_key, query: query_item },
+			method: 'GET',
+			headers: {
+				"Accept":"application/json"
+			}
+		}, callback);
+	};
+
+	this.tvShowAiringToday = function(callback){
+		if(typeof callback === 'undefined'){
+			callback = (response) => { console.log(response); };
+		}
+		executeRequest({
+			url: baseUrl + 'tv/airing_today',
+			qs: { api_key: api_key },
+			method: 'GET',
+			headers: {
+				"Accept": "application/json"
+			}
+		}, callback);
+	};
+
+	this.tvShowOnAir = function(callback){
+		if(typeof callback === 'undefined'){
+			callback = (response) => { console.log(response); };
+		}
+		executeRequest({
+			url: baseUrl + '/tv/on_the_air',
+			qs: { api_key: api_key },
+			method: 'GET',
+			headers: {
+				"Accept": "application/json"
+			}
+		}, callback);
+	};
 }
